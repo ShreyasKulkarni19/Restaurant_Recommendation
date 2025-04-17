@@ -88,9 +88,9 @@ def main():
     print("Hyperparameter tuning for Two-Tower Model...")
     # Hyperparameter tuning
     param_grid = {
-        'embedding_dim': [32, 64],
-        'learning_rate': [0.001, 0.0001],
-        'batch_size': [32, 64]
+        'embedding_dim': [64],
+        'learning_rate': [0.001],
+        'batch_size': [64]
     }
     best_rmse = float('inf')
     best_params = {}
@@ -144,11 +144,11 @@ def main():
     mf_pred = [predict_mf(row['user_id'], row['business_id'], user_map, item_map) for _, row in test.iterrows()]
     evaluate_model(test_labels, mf_pred, "Matrix Factorization")
 
-    print("Evaluating Item-Based CF...")
-    # Baseline: Item-Based CF
-    predict_icf, item_similarities = item_based_cf(train)
-    icf_pred = [predict_icf(row['user_id'], row['business_id'], train, item_similarities) for _, row in test.iterrows()]
-    evaluate_model(test_labels, icf_pred, "Item-Based CF")
+    # print("Evaluating Item-Based CF...")
+    # # Baseline: Item-Based CF
+    # predict_icf, item_similarities = item_based_cf(train)
+    # icf_pred = [predict_icf(row['user_id'], row['business_id'], train, item_similarities) for _, row in test.iterrows()]
+    # evaluate_model(test_labels, icf_pred, "Item-Based CF")
 
     print("-------------------------------------------------------------------")
     print("Training completed for all models.")
