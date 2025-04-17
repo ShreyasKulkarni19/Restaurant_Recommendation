@@ -172,3 +172,6 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+Restaurant_Recommendation/.env
+Restaurant_Recommendation/data
