@@ -1,6 +1,39 @@
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MultiLabelBinarizer, StandardScaler
+import os
+import pickle
+
+def save_preprocessed_data(data, file_path):
+    """
+    Save preprocessed data to disk using pickle.
+
+    Args:
+        data: The preprocessed data to save.
+        file_path: The file path where the data should be saved.
+    """
+    with open(file_path, 'wb') as file:
+        pickle.dump(data, file)
+    print(f"Data saved to {file_path}")
+
+def load_preprocessed_data(file_path):
+    """
+    Load preprocessed data from disk if it exists.
+
+    Args:
+        file_path: The file path from where the data should be loaded.
+
+    Returns:
+        The loaded data if the file exists, otherwise None.
+    """
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as file:
+            data = pickle.load(file)
+        print(f"Data loaded from {file_path}")
+        return data
+    else:
+        print(f"No preprocessed data found at {file_path}")
+        return None
 
 def load_and_preprocess_data(business_file, user_file, review_file, tip_file=None, checkin_file=None, max_categories=50):
     business_df = business_file
