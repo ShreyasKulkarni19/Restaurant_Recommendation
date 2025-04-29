@@ -1,4 +1,4 @@
-# Restaurant Recommendation System
+# Two Tower Model
 To simplify code execution, check out the research.ipynb file and run the cells.
 This project implements a restaurant recommendation system using various machine learning models. The system utilizes user and business data to provide personalized restaurant recommendations.
 
