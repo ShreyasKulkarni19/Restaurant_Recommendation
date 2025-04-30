@@ -102,9 +102,9 @@ def load_and_preprocess_data(business_file, user_file, review_file, tip_file=Non
     restaurant_df['lat_norm'] = scaler.fit_transform(restaurant_df[['latitude']])
     restaurant_df['lon_norm'] = scaler.fit_transform(restaurant_df[['longitude']])
 
-    # Combine restaurant features
+    # Combine restaurant features - REMOVE stars_norm from features as it's the target
     restaurant_features = pd.concat([ 
-        restaurant_df[['business_id', 'stars_norm', 'review_count_norm', 'compliment_count_norm', 'checkin_count_norm', 'lat_norm', 'lon_norm']].reset_index(drop=True),
+        restaurant_df[['business_id', 'review_count_norm', 'compliment_count_norm', 'checkin_count_norm', 'lat_norm', 'lon_norm']].reset_index(drop=True),
         categories_df.reset_index(drop=True),
         parking_df.reset_index(drop=True)
     ], axis=1)

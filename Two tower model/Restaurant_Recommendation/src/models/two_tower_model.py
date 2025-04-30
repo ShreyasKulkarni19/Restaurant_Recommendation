@@ -25,7 +25,6 @@ def build_two_tower_model(user_feature_dim, rest_feature_dim, category_dim, embe
 
     # Item Tower
     rest_inputs = {
-        'stars': tf.keras.Input(shape=(1,), name='stars', dtype=tf.float32),
         'review_count': tf.keras.Input(shape=(1,), name='review_count_rest', dtype=tf.float32),
         'lat': tf.keras.Input(shape=(1,), name='lat', dtype=tf.float32),
         'lon': tf.keras.Input(shape=(1,), name='lon', dtype=tf.float32),
@@ -33,7 +32,6 @@ def build_two_tower_model(user_feature_dim, rest_feature_dim, category_dim, embe
         'parking': tf.keras.Input(shape=(5,), name='parking', dtype=tf.float32)
     }
     rest_dense = layers.Concatenate()([
-        rest_inputs['stars'],
         rest_inputs['review_count'],
         rest_inputs['lat'],
         rest_inputs['lon'],

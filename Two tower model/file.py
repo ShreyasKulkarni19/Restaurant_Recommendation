@@ -66,9 +66,9 @@ def load_and_preprocess_data(business_file, user_file, review_file, max_categori
     restaurant_df['lat_norm'] = scaler.fit_transform(restaurant_df[['latitude']])
     restaurant_df['lon_norm'] = scaler.fit_transform(restaurant_df[['longitude']])
 
-    # Combine restaurant features
+    # Combine restaurant features - Remove stars_norm to prevent data leakage
     restaurant_features = pd.concat([
-        restaurant_df[['business_id', 'stars_norm', 'review_count_norm', 'lat_norm', 'lon_norm']].reset_index(drop=True),
+        restaurant_df[['business_id', 'review_count_norm', 'lat_norm', 'lon_norm']].reset_index(drop=True),
         categories_df.reset_index(drop=True),
         parking_df.reset_index(drop=True)
     ], axis=1)
@@ -116,7 +116,7 @@ def build_two_tower_model(user_feature_dim, rest_feature_dim, category_dim, embe
 
     # Item Tower
     rest_inputs = {
-        'stars': tf.keras.Input(shape=(1,), name='stars', dtype=tf.float32),
+        # Removed 'stars' input since it's what we're trying to predict
         'review_count': tf.keras.Input(shape=(1,), name='review_count_rest', dtype=tf.float32),
         'lat': tf.keras.Input(shape=(1,), name='lat', dtype=tf.float32),
         'lon': tf.keras.Input(shape=(1,), name='lon', dtype=tf.float32),
@@ -124,7 +124,7 @@ def build_two_tower_model(user_feature_dim, rest_feature_dim, category_dim, embe
         'parking': tf.keras.Input(shape=(5,), name='parking', dtype=tf.float32)
     }
     rest_dense = layers.Concatenate()([
-        rest_inputs['stars'],
+        # Removed rest_inputs['stars'] from concatenation
         rest_inputs['review_count'],
         rest_inputs['lat'],
         rest_inputs['lon'],
@@ -215,7 +215,7 @@ def main():
             'elite': data['elite_binary'].values
         }
         rest_features = {
-            'stars': data['stars_norm'].values,
+            # Remove 'stars' from input features as it's what we're trying to predict
             'review_count': data['review_count_norm_y'].values,
             'lat': data['lat_norm'].values,
             'lon': data['lon_norm'].values,
