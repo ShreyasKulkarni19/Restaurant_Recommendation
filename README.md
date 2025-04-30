@@ -76,6 +76,10 @@ Models are evaluated using metrics such as **Root Mean Squared Error (RMSE)** to
 
    (Ensure you have Python 3.x installed. The `requirements.txt` file will be provided with necessary libraries such as pandas, numpy, scikit-learn, etc.)
 
+## Two-tower model inference
+
+![image](https://github.com/user-attachments/assets/3170d007-af47-4716-95d2-8b66752d70a2)
+
 
 ## Future Work
 
