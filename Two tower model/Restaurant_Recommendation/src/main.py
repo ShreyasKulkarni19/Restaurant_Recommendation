@@ -57,7 +57,7 @@ def main():
         }
 
         rest_features = {
-            'stars': data['stars_norm'].values.astype(np.float32),
+            # Removed 'stars' from here since it's what we're trying to predict
             'review_count': data['review_count_norm_y'].values.astype(np.float32),
             'lat': data['lat_norm'].values.astype(np.float32),
             'lon': data['lon_norm'].values.astype(np.float32),
